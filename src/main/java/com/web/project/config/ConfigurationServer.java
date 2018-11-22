@@ -21,7 +21,7 @@ public class ConfigurationServer implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("redirect:/menu");
+        //registry.addViewController("/").setViewName("redirect:/menu");
     }
 
 }
