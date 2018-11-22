@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Games</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        
+        
+        <link href="/leaderboardStyle.css" rel="stylesheet" type="text/css"/>
+
+    </head>
+    <body>
+
+        <div id="loading">
+            <img id="loading-image" src="/spinner.gif" alt="Loading..." />
+        </div>  
+
+        <div class="title">
+            <h1 class="display-3">LEADERBOARD</h1>
+        </div>
+
+        <table class="table table-hover, stripe" id="datatable1">
+            <thead>
+                <tr id="headers">
+                    <td>Username</td>
+                    <td>Score</td>
+                    <td>Level</td>
+                    <td>Kills</td>
+                    <td>Shots</td>
+                    <td>Hits</td>
+                    <td>Accuracy</td>
+                </tr>
+            </thead>
+
+            <tbody>
+            <th:block th:each="game : ${listGames}">
+                <tr>
+                    <td id="user" class="column" th:text="${game.username}"></td>
+                    <td class="column" th:text="${game.score}"></td>
+                    <td class="column" th:text="${game.level}"></td>
+                    <td class="column" th:text="${game.kills}"></td>
+                    <td class="column" th:text="${game.shots}"></td>
+                    <td class="column" th:text="${game.hits}"></td>
+                    <td class="column" th:text="${game.accuracy} +'%'"></td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+
+    <script type="text/javascript" src="/datatablesTest.js"></script>
+    <script language="javascript" type="text/javascript">
+        window.onload = function () {
+            document.getElementById("loading").style.display = "none";
+        };
+    </script>
+
+</body>
+</html>

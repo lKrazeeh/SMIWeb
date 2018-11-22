@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Super Mario Invaders</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <link href="/menuStyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+    <div class="paralsec2"></div>
+    <div class="paralsec"></div>
+    <div class="jumbotron paral">
+        <h1 class="display-3">Super Mario Invaders</h1>
+        <p class="lead">Bring back the old school feeling.</p>
+    </div>
+
+    <div>
+        <nav class="navbar navbar-expand-sm bg-dark">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="button1" href="/intro" target="action">INTRODUCTION</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="button2" href="/how-to-play" target="action">HOW TO PLAY</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="button3" href="/items" target="action">ITEMS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="button4" href="/enemies" target="action">ENEMIES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="button5" href="/list-games" target="action">LEADERBOARD</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="button6" href="/stats" target="action">PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <label class="nav-link" style="color: white;display: inline-block;">Logged in as:</label>
+                    <span class="nav-link" style="color: cyan;display: inline-block" th:object="${userDTO}" th:text="*{username}"></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/menu">Log out</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <iframe id="iframe" src="/intro" name="action"></iframe>
+    <div class="paralsec3"></div>
+    <div class="jumbotron2">
+        <div>
+            <table id="table">
+                <thead>
+                    <tr>
+                        <td id="header">Contact</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td id="header">Design</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td id="header">Follow</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="content">+34 91-111-22-333</td>
+                        <td></td>
+                        <td id="content">Ivan Teba Rodriguez 2ºDAM</td>
+                        <td></td>
+                        <td id="content">Twitter</td>
+                    </tr>
+                    <tr>
+                        <td id="content">65-333-22-111</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="content">Instagram</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="content">Facebook</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            var url = document.getElementById('iframe').contentDocument.location;
+            $("#button1").click(function () {
+                changeUrl('intro', url);
+            });
+            $("#button2").click(function () {
+                changeUrl('howtoplay', 'how-to-play');
+            });
+            $("#button3").click(function () {
+                changeUrl('items', 'items');
+            });
+            $("#button4").click(function () {
+                changeUrl('enemies', 'enemies');
+            });
+            $("#button5").click(function () {
+                changeUrl('leaderboard', 'leaderboard');
+            });
+            $("#button6").click(function () {
+                changeUrl('stats', 'stats');
+            });
+        });
+
+        function changeUrl(page, url) {
+            
+            if (typeof (history.pushState) !== "undefined") {
+                var obj = {Page: page, Url: url};
+                history.pushState(obj, obj.Page, obj.Url);
+            } else {
+                alert("Browser does not support HTML5.");
+            }
+        }
+
+        var jumboHeight = $('.jumbotron').outerHeight();
+        var jumboHeight2 = $('.jumbotron2').outerHeight();
+        function parallax() {
+            var scrolled = $(window).scrollTop();
+            $('.paralsec').css('height', (jumboHeight - scrolled) + 'px');
+            $('.paralsec2').css('height', (jumboHeight - scrolled) + 'px');
+        }
+
+        $(window).scroll(function (e) {
+            parallax();
+        });
+
+    </script>
+</body>
+
+</html>
